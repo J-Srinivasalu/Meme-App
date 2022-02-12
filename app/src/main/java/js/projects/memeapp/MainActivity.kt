@@ -17,11 +17,7 @@ import js.projects.memeapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-<<<<<<< HEAD
     private var memeUrl: String? = null
-=======
-    var memeUrl:String? = null
->>>>>>> d2b0ef32d990cdc427ad78139c5029470b43f193
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -43,13 +39,8 @@ class MainActivity : AppCompatActivity() {
     private fun openShareOptions() {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-<<<<<<< HEAD
-        intent.putExtra(Intent.EXTRA_TEXT, "Hey, Check out this cool meme form Reddit $memeUrl")
-        val chooser = Intent.createChooser(intent, "Share this meme")
-=======
         intent.putExtra(Intent.EXTRA_TEXT,"Hey, Check out this cool meme form Reddit $memeUrl")
         val chooser = Intent.createChooser(intent,"Share this meme")
->>>>>>> d2b0ef32d990cdc427ad78139c5029470b43f193
         startActivity(chooser)
     }
 
@@ -62,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         // Request a json response from the provided URL.
         val jsonRequest = JsonObjectRequest(
-<<<<<<< HEAD
             Request.Method.GET, url, null,
             { response ->
                 if (response.getBoolean("nsfw")) {
@@ -99,39 +89,7 @@ class MainActivity : AppCompatActivity() {
             {
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
             })
-=======
-            Request.Method.GET, url,null,
-            { response ->
-                memeUrl = response.getString("url")
-                Glide.with(this).load(memeUrl).listener(object:RequestListener<Drawable>{
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        binding.progressBar.visibility = View.GONE
-                        return false
-                    }
 
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        binding.progressBar.visibility = View.GONE
-                        return false
-                    }
-
-                }).into(binding.meme)
-            },
-            {
-                Toast.makeText(this,"Something went wrong",Toast.LENGTH_LONG).show()
-            })
-
->>>>>>> d2b0ef32d990cdc427ad78139c5029470b43f193
         // Add the request to the RequestQueue.
         MySingleton.getInstance(this).addToRequestQueue(jsonRequest)
     }
